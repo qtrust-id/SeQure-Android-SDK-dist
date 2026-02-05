@@ -24,7 +24,7 @@ publishing {
             version = "unspecified" // Nanti otomatis diganti JitPack sesuai Tag Git
 
             // Beritahu Gradle bahwa yang mau di-publish adalah file AAR mentah ini
-            artifact(myAarFile)
+            artifact(stagingFile)
 
             pom {
                     withXml {
@@ -41,7 +41,7 @@ publishing {
             version = "unspecified" // Nanti otomatis diganti JitPack sesuai Tag Git
 
             // Beritahu Gradle bahwa yang mau di-publish adalah file AAR mentah ini
-            artifact(myAarFile)
+            artifact(productionFile)
 
             pom {
                     withXml {
