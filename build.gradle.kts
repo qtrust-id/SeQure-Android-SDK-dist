@@ -9,15 +9,35 @@ plugins {
 group = "id.sequre"
 
 // Sesuaikan nama file .aar kamu di sini (harus SAMA PERSIS dengan file yang diupload)
-val myAarFile = file("sequre-android-sdk.aar") 
-val myArtifactId = "sequre-android-sdk" // Nama library saat dipanggil nanti
+val stagingFile = file("sequre-android-sdk-staging.aar")
+val productionFile = file("sequre-android-sdk.aar")
+val stagingArtifactId = "sequre-android-sdk-staging" // Nama library staging saat dipanggil nanti
+val productionArtifactId = "sequre-android-sdk" // Nama library saat dipanggil nanti
 
 publishing {
     publications {
-        create<MavenPublication>("release") {
+        // --- PUBLIKASI 1: STAGING ---
+        create<MavenPublication>("staging") {
             // Set Group ID (biasanya otomatis dari JitPack, tapi kita set defaultnya)
             groupId = project.group.toString()
-            artifactId = myArtifactId
+            artifactId = stagingArtifactId
+            version = "unspecified" // Nanti otomatis diganti JitPack sesuai Tag Git
+
+            // Beritahu Gradle bahwa yang mau di-publish adalah file AAR mentah ini
+            artifact(myAarFile)
+
+            pom {
+                    withXml {
+                        asNode().appendNode("dependencies").apply {
+                            addAllDependencies()
+                        }
+                    }
+                }
+        }
+        create<MavenPublication>("production") {
+            // Set Group ID (biasanya otomatis dari JitPack, tapi kita set defaultnya)
+            groupId = project.group.toString()
+            artifactId = productionArtifactId
             version = "unspecified" // Nanti otomatis diganti JitPack sesuai Tag Git
 
             // Beritahu Gradle bahwa yang mau di-publish adalah file AAR mentah ini
