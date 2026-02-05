@@ -9,8 +9,8 @@ plugins {
 group = "id.sequre"
 
 // Sesuaikan nama file .aar kamu di sini (harus SAMA PERSIS dengan file yang diupload)
-val stagingFile = file("sequre-android-sdk-staging.aar")
-val productionFile = file("sequre-android-sdk.aar")
+val stagingFile = file("sdk-staging-release.aar")
+val productionFile = file("sdk-production-release.aar")
 val stagingArtifactId = "sequre-android-sdk-staging" // Nama library staging saat dipanggil nanti
 val productionArtifactId = "sequre-android-sdk" // Nama library saat dipanggil nanti
 
